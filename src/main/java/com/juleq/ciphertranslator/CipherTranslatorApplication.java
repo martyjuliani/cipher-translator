@@ -9,5 +9,4 @@ public class CipherTranslatorApplication {
     public static void main(String[] args) {
         SpringApplication.run(CipherTranslatorApplication.class, args);
     }
-
 }
