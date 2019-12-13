@@ -1,7 +1,7 @@
-package com.juleq.ciphertranslator.service.impl;
+package com.juleq.ciphertranslator.backend.service.impl;
 
-import com.juleq.ciphertranslator.model.ConversionType;
-import com.juleq.ciphertranslator.service.CipherTranslatorService;
+import com.juleq.ciphertranslator.backend.model.ConversionType;
+import com.juleq.ciphertranslator.backend.service.CipherTranslatorService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +13,7 @@ public class TextToCaesarImpl implements CipherTranslatorService {
     }
 
     @Override
-    public String translate(String text) {
+    public String translate(String text, Character wordSeparator) {
         return "TEXT_CAESAR";
     }
 }

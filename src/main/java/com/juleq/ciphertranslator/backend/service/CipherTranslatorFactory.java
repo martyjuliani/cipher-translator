@@ -1,6 +1,6 @@
-package com.juleq.ciphertranslator.service;
+package com.juleq.ciphertranslator.backend.service;
 
-import com.juleq.ciphertranslator.model.ConversionType;
+import com.juleq.ciphertranslator.backend.model.ConversionType;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

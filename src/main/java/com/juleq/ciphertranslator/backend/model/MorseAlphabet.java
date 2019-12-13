@@ -1,4 +1,4 @@
-package com.juleq.ciphertranslator.model;
+package com.juleq.ciphertranslator.backend.model;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -6,16 +6,32 @@ import com.google.common.collect.Maps;
 
 public class MorseAlphabet {
 
-    public static BiMap<String, Character> morseMap;
+    private static BiMap<String, Character> morseMap;
+    private static BiMap<Character, String> textMap;
 
     static {
         BiMap<String, Character> map = HashBiMap.create();
         fillMorseAlphabet(map);
         morseMap = Maps.unmodifiableBiMap(map);
+        textMap = morseMap.inverse();
+    }
+
+    public static Character getText(String morse) {
+        if (morseMap.get(morse) == null) {
+            throw new IllegalArgumentException("Unknown morse code provided.");
+        }
+        return morseMap.get(morse);
+    }
+
+    public static String getMorse(Character c) {
+        if (textMap.get(c) == null) {
+            throw new IllegalArgumentException("Illegal character provided.");
+        }
+        return morseMap.inverse().get(c);
     }
 
     private static void fillMorseAlphabet(BiMap<String, Character> map) {
-        map.put("", ' ');
+        map.put("|", ' ');
         map.put(".-", 'a');
         map.put(".-.-", 'ä');
         map.put(".--.-", 'á');

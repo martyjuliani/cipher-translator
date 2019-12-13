@@ -1,4 +1,4 @@
-package com.juleq.ciphertranslator.model;
+package com.juleq.ciphertranslator.backend.model;
 
 import java.util.Arrays;
 import java.util.List;

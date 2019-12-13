@@ -1,8 +1,8 @@
-package com.juleq.ciphertranslator.controller;
+package com.juleq.ciphertranslator.backend.controller;
 
-import com.juleq.ciphertranslator.model.ConversionType;
-import com.juleq.ciphertranslator.service.CipherTranslatorFactory;
-import com.juleq.ciphertranslator.service.CipherTranslatorService;
+import com.juleq.ciphertranslator.backend.model.ConversionType;
+import com.juleq.ciphertranslator.backend.service.CipherTranslatorFactory;
+import com.juleq.ciphertranslator.backend.service.CipherTranslatorService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +25,13 @@ public class CipherTranslatorController {
     }
 
     @PostMapping(value = "/translations/{type}", produces = {MediaType.TEXT_PLAIN_VALUE}, consumes = {MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<String> code(@RequestBody String text, @PathVariable("type") String type) {
+    public ResponseEntity<String> code(
+            @RequestBody String text,
+            @PathVariable("type") String type,
+            @RequestParam(defaultValue = "|") Character wordSeparator) {
+
         CipherTranslatorService service = cipherTranslatorFactory.getService(ConversionType.fromName(type));
-        String translation = service.translate(text);
+        String translation = service.translate(text, wordSeparator);
         return ResponseEntity.ok(translation);
     }
 }
