@@ -19,7 +19,7 @@ class TextToMorseServiceImplTest {
     void 'translate text with single spaces'() {
         def text = 'english text to translate.'
 
-        def result = textToMorseService.translate(text)
+        def result = textToMorseService.translate(text, '|' as char)
 
         assert result == ". -. --. .-.. .. ... .... | - . -..- - | - --- | - .-. .- -. ... .-.. .- - . .-.-.- "
     }
@@ -28,7 +28,7 @@ class TextToMorseServiceImplTest {
     void 'translate text with more spaces'() {
         def text = 'two  three   four     '
 
-        def result = textToMorseService.translate(text)
+        def result = textToMorseService.translate(text, '|' as char)
 
         assert result == "- .-- --- | | - .... .-. . . | | | ..-. --- ..- .-. | | | | | "
     }
@@ -37,7 +37,7 @@ class TextToMorseServiceImplTest {
     void 'translate upper case text'() {
         def text = 'ENGLISH TEXT TO TRANSLATE.'
 
-        def result = textToMorseService.translate(text)
+        def result = textToMorseService.translate(text, '|' as char)
 
         assert result == ". -. --. .-.. .. ... .... | - . -..- - | - --- | - .-. .- -. ... .-.. .- - . .-.-.- "
     }
@@ -46,13 +46,13 @@ class TextToMorseServiceImplTest {
     void 'translate not recognized text'() {
         def text = 'Příliš žluťoučký kůň úpěl ďábelské ódy'
 
-        def result = textToMorseService.translate(text)
+        def result = textToMorseService.translate(text, '|' as char)
 
         assert result == ".--. .-. .. .-.. .. ... | --.. .-.. ..- - --- ..- -.-. -.- -.-- | -.- ..- -. | ..- .--. . .-.. | -.. .- -... . .-.. ... -.- . | --- -.. -.-- "
     }
 
     @Test
     void 'do not translate text with illegal characters'() {
-        assertThrows(IllegalArgumentException.class, { -> textToMorseService.translate("Æ¥£") }, "Illegal character provided.")
+        assertThrows(IllegalArgumentException.class, { -> textToMorseService.translate("Æ¥£", '|' as char) }, "Illegal character provided.")
   }
 }

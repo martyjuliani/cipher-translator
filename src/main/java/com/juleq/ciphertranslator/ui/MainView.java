@@ -74,6 +74,7 @@ public class MainView extends VerticalLayout {
 
     private void registerListeners(TextArea sourceArea, TextArea destinationArea, ComboBox<ConversionType> typeMenu, TextField wordSeparator, Label errorOutput, Button button) {
         button.addClickListener(event -> {
+            errorOutput.setText("");
             String translation = translate(typeMenu.getValue(), sourceArea.getValue(), wordSeparator.getValue(), errorOutput);
             destinationArea.setValue(translation);
         });

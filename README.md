@@ -1,6 +1,6 @@
 # Cipher translator
 
-An example for translate Morse cipher. Application is implemented with using Spring boot and Vaadin frameworks. The UI is built with Java only.
+An example web application for translation Morse cipher. It is implemented with using Spring boot and Vaadin frameworks. 
 
 Source files are available on GitHub https://github.com/martyjuliani/cipher-translator.
 
@@ -24,12 +24,6 @@ Run `mvn clean install spring-boot:run` in the project root directory. After the
 ## Running the project from your IDE
 
 Navigate to the `com.juleq.ciphertranslator.CipherTranslatorApplication.java` class and run it as a Java application.  
-
-### Running tests
-
-Tests are implemented using TestBench. The tests take a few minutes to run and are therefore included in a separate Maven profile. To run the tests using Google Chrome, execute
-
-`mvn verify -Pit`
 
 ### Branching information:
 * `master` the latest version of the application

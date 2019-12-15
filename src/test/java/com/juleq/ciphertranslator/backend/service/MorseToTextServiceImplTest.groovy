@@ -18,13 +18,13 @@ class MorseToTextServiceImplTest {
     void 'translate morse code to text'() {
         def morse = '. -. --. .-.. .. ... .... | - . -..- - | - --- | - .-. .- -. ... .-.. .- - . .-.-.-'
 
-        def result = morseToTextService.translate(morse)
+        def result = morseToTextService.translate(morse, '|' as char)
 
         assert result == "english text to translate."
     }
 
     @Test
     void 'do not translate unknown morse codes'() {
-        assertThrows(IllegalArgumentException.class, { -> morseToTextService.translate("&......------") }, "Unknown morse code provided.")
+        assertThrows(IllegalArgumentException.class, { -> morseToTextService.translate("&......------", '|' as char) }, "Unknown morse code provided.")
     }
 }
