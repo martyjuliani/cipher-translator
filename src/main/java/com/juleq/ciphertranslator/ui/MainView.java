@@ -11,6 +11,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
@@ -28,17 +29,23 @@ public class MainView extends VerticalLayout {
         H1 heading = new H1("Cipher translator");
 
         TextArea sourceArea = new TextArea();
+        sourceArea.setValueChangeMode(ValueChangeMode.EAGER);
         sourceArea.setMinWidth("600px");
+        sourceArea.setMaxWidth("600px");
         sourceArea.setMinHeight("200px");
+        sourceArea.setMaxHeight("200px");
 
         TextArea destinationArea = new TextArea();
         destinationArea.setMinWidth("600px");
         destinationArea.setMinHeight("200px");
+        destinationArea.setMinHeight("200px");
+        destinationArea.setMaxHeight("200px");
 
         ComboBox<ConversionType> typeMenu = new ComboBox<>();
-        typeMenu.setMinWidth("365px");
+        typeMenu.setMinWidth("368px");
         typeMenu.setPlaceholder("Select conversion type");
         typeMenu.setItems(ConversionType.values());
+        typeMenu.setAllowCustomValue(false);
         typeMenu.setValue(ConversionType.TEXT_MORSE);
 
         TextField wordSeparator = new TextField();
@@ -46,6 +53,7 @@ public class MainView extends VerticalLayout {
         wordSeparator.setMaxLength(1);
         wordSeparator.setValue("|");
         wordSeparator.setPlaceholder("Separator");
+        wordSeparator.setValueChangeMode(ValueChangeMode.EAGER);
 
         Label errorOutput = new Label();
         errorOutput.getStyle().set("color", "red");
@@ -73,12 +81,16 @@ public class MainView extends VerticalLayout {
     }
 
     private void registerListeners(TextArea sourceArea, TextArea destinationArea, ComboBox<ConversionType> typeMenu, TextField wordSeparator, Label errorOutput, Button button) {
+        sourceArea.addValueChangeListener(event -> button.setEnabled(isInputValid(sourceArea, wordSeparator)));
+        wordSeparator.addValueChangeListener(event -> button.setEnabled(isInputValid(sourceArea, wordSeparator)));
         button.addClickListener(event -> {
             errorOutput.setText("");
             String translation = translate(typeMenu.getValue(), sourceArea.getValue(), wordSeparator.getValue(), errorOutput);
             destinationArea.setValue(translation);
         });
-        wordSeparator.addBlurListener(event -> button.setEnabled(!wordSeparator.getValue().isBlank()));
-        sourceArea.addBlurListener(event -> button.setEnabled(!sourceArea.getValue().isBlank()));
+    }
+
+    private static boolean isInputValid(TextArea sourceArea, TextField wordSeparator) {
+        return !sourceArea.getValue().isBlank() && !wordSeparator.getValue().isBlank();
     }
 }
