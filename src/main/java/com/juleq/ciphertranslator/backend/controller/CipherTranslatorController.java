@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("cipher-translator")
 public class CipherTranslatorController {
 
-    private final CipherTranslatorFactory cipherTranslatorFactory;
+    private CipherTranslatorFactory cipherTranslatorFactory;
 
     public CipherTranslatorController(CipherTranslatorFactory cipherTranslatorFactory) {
         this.cipherTranslatorFactory = cipherTranslatorFactory;
@@ -25,7 +25,7 @@ public class CipherTranslatorController {
     }
 
     @PostMapping(value = "/translations/{type}", produces = {MediaType.TEXT_PLAIN_VALUE}, consumes = {MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<String> code(
+    public ResponseEntity<String> translate(
             @RequestBody String text,
             @PathVariable("type") String type,
             @RequestParam(defaultValue = "|") Character wordSeparator) {

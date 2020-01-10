@@ -1,6 +1,5 @@
 package com.juleq.ciphertranslator.backend.service.impl;
 
-import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.juleq.ciphertranslator.backend.model.ConversionType;
