@@ -15,8 +15,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static java.util.Objects.requireNonNull;
 
-@SpringBootTest(classes = CipherTranslatorApplication.class,
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT )
+@SpringBootTest(classes = CipherTranslatorApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT )
 public class CipherTranslatorIntegrationTest {
 
     @LocalServerPort
@@ -41,9 +40,20 @@ public class CipherTranslatorIntegrationTest {
     void testPostTextToMorse() {
         String text = "english text to translate.";
         String expected = ". -. --. .-.. .. ... .... | - . -..- - | - --- | - .-. .- -. ... .-.. .- - . .-.-.- ";
-        String type = "Text to Morse code";
         ResponseEntity<String> responseEntity = this.restTemplate
-                .postForEntity("http://localhost:" + port + "/cipher-translator/translations/" + type, text, String.class);
+                .postForEntity("http://localhost:" + port + "/cipher-translator/translations/Text to Morse code", text, String.class);
+
+        String result = responseEntity.getBody();
+        Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+        Assert.assertEquals(result, expected);
+    }
+
+    @Test
+    void testPostMorseToText() {
+        String morse = ". -. --. .-.. .. ... .... | - . -..- - | - --- | - .-. .- -. ... .-.. .- - . .-.-.- ";
+        String expected = "english text to translate.";
+        ResponseEntity<String> responseEntity = this.restTemplate
+                .postForEntity("http://localhost:" + port + "/cipher-translator/translations/Morse code to text", morse, String.class);
 
         String result = responseEntity.getBody();
         Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
