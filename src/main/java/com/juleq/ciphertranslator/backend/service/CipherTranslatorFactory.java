@@ -14,7 +14,9 @@ public class CipherTranslatorFactory {
     private final List<CipherTranslatorService> services;
 
     /**
-     * Initialise all types of used translation services.
+     * Initialise all types of used translation services. Spring will create and manage services on its own. Service
+     * annotations will tell Spring to create bean instances of the corresponding classes.
+     *
      * @param services the cipher translation service implementations
      */
     public CipherTranslatorFactory(List<CipherTranslatorService> services) {
@@ -23,6 +25,7 @@ public class CipherTranslatorFactory {
 
     /**
      * Return concrete service implementation according to conversion type.
+     *
      * @param type the conversion type which determines source and destination code
      * @return the cipher service which will be used to translation
      * @throws IllegalArgumentException if the unknown type of translation is detected

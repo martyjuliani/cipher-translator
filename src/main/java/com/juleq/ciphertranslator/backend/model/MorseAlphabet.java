@@ -4,18 +4,26 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
 
+/**
+ * Class for morse alphabet. Guava bidirectional map was used due to the reversed view and possibility to get the key
+ * back from the related value.
+ */
 public class MorseAlphabet {
 
     private static BiMap<String, Character> morseMap;
-    private static BiMap<Character, String> textMap;
 
     static {
         BiMap<String, Character> map = HashBiMap.create();
         fillMorseAlphabet(map);
         morseMap = Maps.unmodifiableBiMap(map);
-        textMap = morseMap.inverse();
     }
 
+    /**
+     * Gets a text representation of morse code.
+     *
+     * @param morse the morse string
+     * @throws IllegalArgumentException if the specified morse code has no conversion defined
+     */
     public static Character getText(String morse) {
         if (morseMap.get(morse) == null) {
             throw new IllegalArgumentException("Unknown morse code provided.");
@@ -23,9 +31,15 @@ public class MorseAlphabet {
         return morseMap.get(morse);
     }
 
+    /**
+     * Gets a morse representation of one character.
+     *
+     * @param c the character from english alphabet
+     * @throws IllegalArgumentException if the specified character has no morse code defined
+     */
     public static String getMorse(Character c) {
-        if (textMap.get(c) == null) {
-            throw new IllegalArgumentException("Illegal character provided.");
+        if (morseMap.inverse().get(c) == null) {
+            throw new IllegalArgumentException("Unknown character provided.");
         }
         return morseMap.inverse().get(c);
     }

@@ -21,7 +21,7 @@ public enum ConversionType {
         return Arrays.stream(ConversionType.values())
                 .filter(value -> value.name.equals(name))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Unknown type of translation detected: " + name));
+                .orElseThrow(() -> new IllegalArgumentException("Unknown type of conversion detected: '" + name + "'"));
     }
 
     public static List<String> getNames() {
