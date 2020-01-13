@@ -14,8 +14,8 @@ public class CipherTranslatorFactory {
     private final List<CipherTranslatorService> services;
 
     /**
-     * Initialise all types of used translation services. Spring will create and manage services on its own. Service
-     * annotations will tell Spring to create bean instances of the corresponding classes.
+     * Initialise all types of implemented translation services. Spring will create and manage these services on its own.
+     * Service annotations will tell Spring to create bean instances of the corresponding classes.
      *
      * @param services the cipher translation service implementations
      */

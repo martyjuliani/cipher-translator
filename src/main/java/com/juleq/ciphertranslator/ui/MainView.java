@@ -91,6 +91,6 @@ public class MainView extends VerticalLayout {
     }
 
     private static boolean isInputValid(TextArea sourceArea, TextField wordSeparator) {
-        return !sourceArea.getValue().isBlank() && !wordSeparator.getValue().isBlank();
+        return !sourceArea.getValue().isBlank() && !wordSeparator.getValue().isEmpty();
     }
 }

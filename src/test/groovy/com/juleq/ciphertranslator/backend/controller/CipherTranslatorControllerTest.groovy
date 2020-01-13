@@ -34,7 +34,7 @@ class CipherTranslatorControllerTest {
 
     @Test
     void 'check all available conversion types'() {
-        def result = controller.getConversionTypes()
+        def result = controller.getTranslationTypes()
 
         assert result == ["Text to Morse code", "Morse code to text", "Text to Caesar code", "Caesar code to text"]
     }

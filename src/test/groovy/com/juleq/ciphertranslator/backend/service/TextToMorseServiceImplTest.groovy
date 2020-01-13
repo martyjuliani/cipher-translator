@@ -19,14 +19,14 @@ class TextToMorseServiceImplTest {
 
     @BeforeMethod
     void init() {
-        initMocks(this);
+        initMocks(this)
     }
 
     @Test
     void 'translate text with single spaces'() {
         def text = 'english text to translate.'
 
-        def result = textToMorseService.translate(text, '|' as char)
+        def result = textToMorseService.translate(text, '|' as Character)
 
         assert result == ". -. --. .-.. .. ... .... | - . -..- - | - --- | - .-. .- -. ... .-.. .- - . .-.-.- "
     }
@@ -35,7 +35,7 @@ class TextToMorseServiceImplTest {
     void 'translate text with more spaces'() {
         def text = 'two  three   four     '
 
-        def result = textToMorseService.translate(text, '|' as char)
+        def result = textToMorseService.translate(text, '|' as Character)
 
         assert result == "- .-- --- | | - .... .-. . . | | | ..-. --- ..- .-. | | | | | "
     }
@@ -44,7 +44,7 @@ class TextToMorseServiceImplTest {
     void 'translate upper case text'() {
         def text = 'ENGLISH TEXT TO TRANSLATE.'
 
-        def result = textToMorseService.translate(text, '|' as char)
+        def result = textToMorseService.translate(text, '|' as Character)
 
         assert result == ". -. --. .-.. .. ... .... | - . -..- - | - --- | - .-. .- -. ... .-.. .- - . .-.-.- "
     }
@@ -60,6 +60,8 @@ class TextToMorseServiceImplTest {
 
     @Test
     void 'do not translate text with illegal characters'() {
-        assertThrows(IllegalArgumentException.class, { -> textToMorseService.translate("Æ¥£", '|' as char) }, "Illegal character provided.")
-  }
+        assertThrows(IllegalArgumentException.class, { ->
+            textToMorseService.translate("Æ¥£", '|' as char)
+        }, "Illegal character provided.")
+    }
 }
