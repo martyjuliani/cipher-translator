@@ -1,15 +1,17 @@
-package com.packagename.myapp.bookstore.ui;
+package com.juleq.ciphertranslator.ui;
 
-import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.*;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.ErrorParameter;
+import com.vaadin.flow.router.HasErrorParameter;
+import com.vaadin.flow.router.NotFoundException;
 
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * View shown when trying to navigate to a view that does not exist using
+ * View shown when trying to navigate to a view that does not exist.
  */
 public class ErrorView extends VerticalLayout implements HasErrorParameter<NotFoundException> {
 
